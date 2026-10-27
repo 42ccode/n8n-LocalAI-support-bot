@@ -1,5 +1,5 @@
 {
-  "name": "AI 客服（知识库 + 聊天记录 + 脱敏）",
+  "name": "本地部署知识库 AI 客服（n8n 工作流）",
   "nodes": [
     {
       "parameters": {

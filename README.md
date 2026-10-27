@@ -1,8 +1,10 @@
-# AI 客服 · n8n 工作流
+# 本地部署知识库 AI 客服 · n8n 工作流
 
-一个 [n8n](https://n8n.io) 工作流：开箱即用的网页 AI 客服。它根据**你自己的知识库**回答问题，记得同一会话里聊过的内容，把聊天记录存进 n8n 数据表，并在发给 AI 和写入记录之前**自动遮盖密钥、邮箱、手机号等敏感信息**。
+一个可以部署在你自己服务器或电脑上的 [n8n](https://n8n.io) 工作流：开箱即用的知识库 AI 客服。它根据**你自己的知识库**回答问题，记得同一会话里聊过的内容，把聊天记录存进 n8n 数据表，并在发给 AI 和写入记录之前**自动遮盖密钥、邮箱、手机号等敏感信息**。
 
-> A ready-to-use AI customer-support chatbot for n8n: answers from your own knowledge base, remembers the conversation, logs every chat to an n8n Data Table, and redacts secrets and personal data before anything reaches the LLM or the log. See [English quick start](#english-quick-start).
+**「本地部署」指什么**：工作流、知识库和聊天记录都保存在你自己部署的 n8n 里，不依赖任何第三方平台；回答由 DeepSeek 等云端大模型生成，所以每次提问时，知识库内容和**已脱敏**的对话会发送给你配置的模型服务。如果希望完全不出本机，可以把模型换成本地运行的兼容服务（见「能换成别的模型吗？」）。
+
+> A self-hosted knowledge-base AI customer-support workflow for n8n: answers from your own knowledge base, remembers the conversation, logs every chat to an n8n Data Table, and redacts secrets and personal data before anything reaches the LLM or the log. The workflow, knowledge base and chat logs stay in your own n8n; answers come from the LLM you configure (DeepSeek by default). See [English quick start](#english-quick-start).
 
 ## 特点
 
@@ -110,7 +112,7 @@ n8n 默认会把每次运行的完整数据（包括访客的原始消息）存�
 用 HTTP Request 直接调用接口更透明，方便在发送前脱敏；聊天记录存在数据表里，既能查看，又能在 n8n 重启后保留记忆。
 
 **能换成别的模型吗？**
-可以。改「组装请求」里的 `MODEL`，以及「DeepSeek 回答」节点里的接口地址和凭据，换成任何兼容 OpenAI `/chat/completions` 格式的服务即可。
+可以。改「组装请求」里的 `MODEL`，以及「DeepSeek 回答」节点里的接口地址和凭据，换成任何兼容 OpenAI `/chat/completions` 格式的服务即可。想让数据完全不出本机，可以用本地运行的模型服务（例如 Ollama 提供的 OpenAI 兼容接口 `http://<主机>:11434/v1/chat/completions`），此时接口地址指向本机，凭据按该服务的要求配置（通常不需要）。本地模型的回答质量取决于模型大小，建议先用真实问题测试。
 
 ## English quick start
 
